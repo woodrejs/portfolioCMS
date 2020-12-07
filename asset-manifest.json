@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/Szczepanski/static/css/main.9b265d5f.chunk.css",
+    "main.js": "/Szczepanski/static/js/main.26f5c461.chunk.js",
+    "main.js.map": "/Szczepanski/static/js/main.26f5c461.chunk.js.map",
+    "runtime-main.js": "/Szczepanski/static/js/runtime-main.ddf4640f.js",
+    "runtime-main.js.map": "/Szczepanski/static/js/runtime-main.ddf4640f.js.map",
+    "static/css/2.e051a28d.chunk.css": "/Szczepanski/static/css/2.e051a28d.chunk.css",
+    "static/js/2.b88c7f44.chunk.js": "/Szczepanski/static/js/2.b88c7f44.chunk.js",
+    "static/js/2.b88c7f44.chunk.js.map": "/Szczepanski/static/js/2.b88c7f44.chunk.js.map",
+    "index.html": "/Szczepanski/index.html",
+    "static/css/2.e051a28d.chunk.css.map": "/Szczepanski/static/css/2.e051a28d.chunk.css.map",
+    "static/css/main.9b265d5f.chunk.css.map": "/Szczepanski/static/css/main.9b265d5f.chunk.css.map",
+    "static/js/2.b88c7f44.chunk.js.LICENSE.txt": "/Szczepanski/static/js/2.b88c7f44.chunk.js.LICENSE.txt",
+    "static/media/Close_Dark.6e62bf34.svg": "/Szczepanski/static/media/Close_Dark.6e62bf34.svg",
+    "static/media/Close_Light.2ed7edc6.svg": "/Szczepanski/static/media/Close_Light.2ed7edc6.svg",
+    "static/media/index.css": "/Szczepanski/static/media/Montserrat-SemiBold.fa8441f3.ttf",
+    "static/media/dark_arrow_icon.97736ea7.svg": "/Szczepanski/static/media/dark_arrow_icon.97736ea7.svg",
+    "static/media/dark_copywriter_icon.79cb9094.svg": "/Szczepanski/static/media/dark_copywriter_icon.79cb9094.svg",
+    "static/media/dark_cross_icon.02c13cf9.svg": "/Szczepanski/static/media/dark_cross_icon.02c13cf9.svg",
+    "static/media/lightgallery.css": "/Szczepanski/static/media/lg.adb7aeef.svg",
+    "static/media/light_arrow_icon.8dff03c5.svg": "/Szczepanski/static/media/light_arrow_icon.8dff03c5.svg",
+    "static/media/light_copywriter_icon.2ca9d414.svg": "/Szczepanski/static/media/light_copywriter_icon.2ca9d414.svg",
+    "static/media/light_cross_icon.8cbb17a7.svg": "/Szczepanski/static/media/light_cross_icon.8cbb17a7.svg",
+    "static/media/my_photo.1278df6e.jpg": "/Szczepanski/static/media/my_photo.1278df6e.jpg",
+    "static/media/my_photo_1024.41c1b110.jpg": "/Szczepanski/static/media/my_photo_1024.41c1b110.jpg",
+    "static/media/my_photo_1024.e0af8e39.jpg": "/Szczepanski/static/media/my_photo_1024.e0af8e39.jpg",
+    "static/media/my_photo_2000.9b205096.jpg": "/Szczepanski/static/media/my_photo_2000.9b205096.jpg",
+    "static/media/my_photo_736.78abf839.jpg": "/Szczepanski/static/media/my_photo_736.78abf839.jpg",
+    "static/media/my_photo_736.bbe22852.jpg": "/Szczepanski/static/media/my_photo_736.bbe22852.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ddf4640f.js",
+    "static/css/2.e051a28d.chunk.css",
+    "static/js/2.b88c7f44.chunk.js",
+    "static/css/main.9b265d5f.chunk.css",
+    "static/js/main.26f5c461.chunk.js"
+  ]
+}
