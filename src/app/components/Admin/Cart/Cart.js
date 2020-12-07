@@ -9,6 +9,7 @@ import {
   StyledRightBox,
 } from "./Cart.css";
 import DarkCloseIcon from "../../../../assets/icons/Close_Dark.svg";
+import { URL } from "../../../../index";
 
 const Cart = ({ state }) => {
   const [, { deleteProject }] = useCounter();
@@ -21,7 +22,7 @@ const Cart = ({ state }) => {
       headers: { "x-auth-token": token },
     };
 
-    fetch(`/projects/delete/${_id}`, options)
+    fetch(`${URL}/projects/delete/${_id}`, options)
       .then((resp) => resp.json())
       .then((resp) => deleteProject(resp._id))
       .catch((err) => console.log(err));

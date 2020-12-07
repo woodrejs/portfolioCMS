@@ -6,6 +6,7 @@ import {
   StyledLabel,
   StyledButton,
 } from "./TextInput.css";
+import { URL } from "../../../../../index";
 
 const TextInput = ({ name, value, _id }) => {
   const [show, setShow] = useState(false);
@@ -24,7 +25,7 @@ const TextInput = ({ name, value, _id }) => {
         },
       };
 
-      fetch(`/projects/update/text/${_id}`, options).catch((err) =>
+      fetch(`${URL}/projects/update/text/${_id}`, options).catch((err) =>
         console.log(err)
       );
     }

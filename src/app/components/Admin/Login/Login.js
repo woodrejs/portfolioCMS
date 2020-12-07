@@ -8,6 +8,7 @@ import {
   StyledInput,
   StyledBtn,
 } from "./Login.css";
+import { URL } from "../../../../index";
 
 const Login = () => {
   const [inputState, setInputState] = useState({
@@ -27,7 +28,7 @@ const Login = () => {
       },
     };
 
-    fetch("/user/login", options)
+    fetch(`${URL}/user/login`, options)
       .then((resp) => resp.json())
       .then((resp) => {
         if ("token" in resp) return setLogged(true, resp.token);

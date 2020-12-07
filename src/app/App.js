@@ -9,6 +9,7 @@ import Project from "./pages/Project";
 import Admin from "./pages/Admin";
 import { useCounter } from "./utils/sweet_state";
 import Load from "./pages/Load";
+import { URL } from "../index";
 
 const App = () => {
   const location = useLocation();
@@ -38,7 +39,7 @@ const App = () => {
       return setLogged(false, token);
     }
 
-    fetch("user/tokenIsValid", {
+    fetch(`${URL}/user/tokenIsValid`, {
       method: "POST",
       body: null,
       headers: {

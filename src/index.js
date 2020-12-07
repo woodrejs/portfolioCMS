@@ -30,6 +30,7 @@ const theme = {
     xxxxxxxxxxl: "282.83px",
   },
 };
+export const URL = "https://portfolio-szczepanski.herokuapp.com";
 
 ReactDOM.render(
   <React.StrictMode>

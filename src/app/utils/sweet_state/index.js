@@ -1,4 +1,5 @@
 import { createStore, createSubscriber, createHook } from "react-sweet-state";
+import { URL } from "../../../index";
 
 const pathname = window.location.pathname;
 
@@ -47,7 +48,7 @@ const Store = createStore({
         loading: true,
       });
 
-      let projects = await fetch("/projects");
+      let projects = await fetch(`${URL}/projects`);
       projects = await projects.json();
 
       setState({

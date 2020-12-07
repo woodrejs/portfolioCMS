@@ -10,6 +10,7 @@ import {
   StyledPanel,
   StyledPanelBtn,
 } from "./FileInput.css";
+import { URL } from "../../../../../index";
 
 const inputFileSizes = [
   { id: uuid(), size: "s" },
@@ -33,7 +34,7 @@ const FileInput = ({ name, value, _id }) => {
           "x-auth-token": token,
         },
       };
-      fetch(`/projects/update/file/${_id}`, options)
+      fetch(`${URL}/projects/update/file/${_id}`, options)
         .then((resp) => resp.json())
         .then((resp) => updateProject(resp))
         .catch((err) => console.log(err));

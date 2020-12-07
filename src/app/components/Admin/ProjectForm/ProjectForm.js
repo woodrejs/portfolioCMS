@@ -10,6 +10,7 @@ import {
   StyledButton,
   StyledTitle,
 } from "./ProjectForm.css";
+import { URL } from "../../../../index";
 
 const textInputsNames = [
   { name: "title", id: uuid() },
@@ -37,11 +38,11 @@ const ProjectForm = () => {
     mobileView: { s: "", m: "", l: "" },
   });
 
-  const handleForm = (e, url, data) => {
+  const handleForm = (e, data) => {
     e.preventDefault();
     const token = localStorage.getItem("auth-token");
 
-    return fetch(url, {
+    return fetch(`${URL}/projects`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -55,7 +56,7 @@ const ProjectForm = () => {
   };
 
   return (
-    <StyledForm onSubmit={(e) => handleForm(e, "/projects", newProject)}>
+    <StyledForm onSubmit={(e) => handleForm(e, newProject)}>
       <StyledTitle>Dodaj projekt</StyledTitle>
       <StyledTopBox>
         {textInputsNames.map(({ name, id }) => (
