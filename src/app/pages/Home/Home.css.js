@@ -33,34 +33,22 @@ export const StyledSection = styled.section`
 `;
 export const StyledTitle = styled(Title)`
   grid-area: 1/1/2/13;
-  margin-top: 0.5em;
+  margin-top: 1rem;
 `;
-export const StyledSubTitleBox = styled(motion.div)`
+export const StyledSubTitle = styled(Title)`
   grid-area: 1/1/2/13;
   justify-self: end;
   align-self: end;
   margin-bottom: 0.1em;
-  overflow: hidden;
-`;
-export const StyledSubTitle = styled(motion.h2)`
   font-weight: 400;
-  font-size: ${(props) => props.theme.size.m};
-  color: ${(props) => props.theme.colors.dark};
-  line-height: 100%;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 414px) and (orientation: portrait) {
-    font-size: ${(props) => props.theme.size.l};
-  }
-  @media screen and (min-width: 1024px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xl};
-  }
+  transform-origin: top left;
 `;
 export const StyledPhotoBox = styled(Link)`
   grid-area: 2/1/4/13;
   align-self: end;
   height: 50vh;
   overflow: hidden;
+  transform-origin: top left;
 
   @media screen and (min-width: 375px) and (orientation: portrait) {
     height: 60vh;
@@ -80,6 +68,7 @@ export const StyledPhotoBox = styled(Link)`
 `;
 export const StyledPhoto = styled(motion.img)`
   width: 100%;
+  transform-origin: top left;
 `;
 export const StyledButton = styled(Button)`
   grid-area: 2/2/3/13;

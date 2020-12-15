@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledCart = styled.article`
   width: 38vw;
-  height: 50vh;
+  height: 65vh;
   margin: 25px 0;
   background: ${(props) => props.theme.colors.light};
   padding: 35px;

@@ -33,13 +33,13 @@ export const StyledTitle = styled(Title)`
   grid-area: 1/1/2/13;
   align-self: end;
   word-wrap: break-word;
-  max-width: 28ch;
+  max-width: 19ch;
 
   @media screen and (min-width: 568px) and (orientation: landscape) {
     max-width: unset;
   }
-  @media screen and (min-width: 600px) and (orientation: portrait) {
-    max-width: 40ch;
+  @media screen and (orientation: portrait) {
+    max-width: 14ch;
   }
 `;
 export const StyledText = styled(motion.p)`
@@ -48,7 +48,7 @@ export const StyledText = styled(motion.p)`
   color: ${(props) => props.theme.colors.dark};
   line-height: 160%;
   max-width: 45ch;
-
+  transform-origin: top left;
   grid-area: 2/1/3/13;
   align-self: start;
   margin-top: 1em;

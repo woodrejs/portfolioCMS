@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../../components/Nav";
-import { variants_text } from "../../utils/motion/index";
+import { variants_main } from "../../utils/motion/main.motion";
 import { DATA } from "./Contact.data";
 import {
   StyledBck,
@@ -20,7 +20,7 @@ const Contact = () => {
         <StyledTitle size="m" title="m.szczepanski@gmail.com" />
         <StyledText
           children={DATA.text}
-          variants={variants_text}
+          variants={variants_main}
           animate="visible"
           initial="hidden"
           exit="hidden"

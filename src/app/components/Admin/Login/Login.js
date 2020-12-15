@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useCounter } from "../../../utils/sweet_state";
+import axios from "axios";
+import { v4 as uuid } from "uuid";
 import {
   StyledFormBox,
   StyledForm,
@@ -8,31 +10,27 @@ import {
   StyledInput,
   StyledBtn,
 } from "./Login.css";
-import { URL } from "../../../../index";
+
+const inputs = [
+  { name: "email", id: uuid() },
+  { name: "password", id: uuid() },
+];
 
 const Login = () => {
-  const [inputState, setInputState] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = inputState;
+  const [state, setState] = useState();
   const [, { setLogged }] = useCounter();
 
+  //handlers
   const handleForm = (e) => {
     e.preventDefault();
-    const options = {
-      method: "POST",
-      body: JSON.stringify(inputState),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
 
-    fetch(`${URL}/user/login`, options)
-      .then((resp) => resp.json())
-      .then((resp) => {
-        if ("token" in resp) return setLogged(true, resp.token);
-        console.log(resp);
+    const url = `${process.env.REACT_APP_URL}/user/login`;
+    const headers = { "Content-Type": "application/json" };
+
+    axios
+      .post(url, state, headers)
+      .then(({ data }) => {
+        if ("token" in data) return setLogged(true, data.token);
       })
       .catch((err) => console.log(err));
   };
@@ -40,30 +38,19 @@ const Login = () => {
   return (
     <StyledFormBox>
       <StyledForm onSubmit={handleForm}>
-        <StyledInputBox>
-          <StyledLabel>email</StyledLabel>
-          <StyledInput
-            type="mail"
-            name="email"
-            value={email}
-            onChange={(e) =>
-              setInputState({ ...inputState, email: e.target.value })
-            }
-          />
-        </StyledInputBox>
-        <StyledInputBox>
-          <StyledLabel>hasło</StyledLabel>
-          <StyledInput
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) =>
-              setInputState({ ...inputState, password: e.target.value })
-            }
-          />
-        </StyledInputBox>
+        {inputs.map(({ name, id }) => (
+          <StyledInputBox key={id}>
+            <StyledLabel children={name} />
+            <StyledInput
+              type={name}
+              name={name}
+              value={state && state[name] ? state[name] : ""}
+              onChange={(e) => setState({ ...state, [name]: e.target.value })}
+            />
+          </StyledInputBox>
+        ))}
 
-        <StyledBtn type="submit" value="log in" />
+        <StyledBtn type="submit" value="zaloguj" />
       </StyledForm>
     </StyledFormBox>
   );

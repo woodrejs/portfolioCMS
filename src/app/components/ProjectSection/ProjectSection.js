@@ -1,20 +1,13 @@
-import React from "react";
-import { InView } from "react-intersection-observer";
+import React, { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
-import {
-  variants_text,
-  variants_item,
-  variants_photo,
-  variants_list,
-} from "../../utils/motion/index";
+import { v4 as uuid } from "uuid";
+import { variants_main } from "../../utils/motion/main.motion";
 import {
   StyledArticle,
   StyledInfoBox,
   StyledTitle,
-  StyledDate,
-  StyledType,
-  StyledDateData,
-  StyledTypeData,
+  StyledData,
   StyledNumber,
   StyledPhotoBox,
   StyledPhoto,
@@ -22,74 +15,76 @@ import {
   StyledLine,
 } from "./ProjectSection.css";
 
+const infoFields = [
+  { name: "data", option: "dateLable", id: uuid() },
+  { name: "typ", option: "typeLable", id: uuid() },
+  { name: null, option: "date", id: uuid() },
+  { name: null, option: "type", id: uuid() },
+];
+
 const ProjectSection = ({ data, number }) => {
-  const { type, name, thumbnail, _id, date } = data;
+  const [show, setShow] = useState(false);
+  const { title, thumbnail, _id } = data;
+  const { ref, inView } = useInView({
+    threshold: 0,
+    triggerOnce: true,
+  });
+
+  useEffect(() => setShow(inView), [inView]);
+
   return (
-    <StyledArticle>
+    <StyledArticle ref={ref}>
       <StyledLine />
 
-      <InView triggerOnce={true} threshold={0.2}>
-        {({ inView, ref }) => (
-          <StyledNumber
-            ref={ref}
-            children={number}
-            variants={variants_text}
-            animate={inView ? "visible" : "hidden"}
+      <StyledNumber
+        children={number}
+        variants={variants_main}
+        animate={show ? "visible" : "hidden"}
+        initial="hidden"
+        exit="hidden"
+      />
+
+      <StyledInfoBox>
+        <StyledTitle
+          children={title}
+          variants={variants_main}
+          animate={show ? "visible" : "hidden"}
+          initial="hidden"
+          exit="hidden"
+        />
+        {infoFields.map(({ name, id, option }) => (
+          <StyledData
+            option={option}
+            key={id}
+            children={name ? name : data[option]}
+            variants={variants_main}
+            animate={show ? "visible" : "hidden"}
             initial="hidden"
             exit="hidden"
           />
-        )}
-      </InView>
+        ))}
+      </StyledInfoBox>
 
-      <InView triggerOnce={true} threshold={0.2}>
-        {({ inView, ref }) => (
-          <StyledInfoBox
-            ref={ref}
-            variants={variants_list}
-            animate={inView ? "visible" : "hidden"}
-            initial="hidden"
-            exit="hidden"
-          >
-            <StyledTitle children={name} variants={variants_item} custom={0} />
-            <StyledDate children="data" variants={variants_item} custom={1} />
-            <StyledType children="typ" variants={variants_item} custom={3} />
-            <StyledTypeData
-              children={type}
-              variants={variants_item}
-              custom={4}
-            />
-            <StyledDateData
-              children={date}
-              variants={variants_item}
-              custom={2}
-            />
-          </StyledInfoBox>
-        )}
-      </InView>
-
-      <StyledPhotoBox>
+      <StyledPhotoBox
+        variants={variants_main}
+        animate={show ? "visible" : "hidden"}
+        initial="hidden"
+        exit="hidden"
+      >
         <Link to={`/project/${_id}`}>
-          <InView triggerOnce={true} threshold={0}>
-            {({ inView, ref }) => (
-              <StyledPhoto
-                srcSet={`${thumbnail.s.base64} 400w,
-                ${thumbnail.l.base64} 800w`}
-                sizes="(max-width: 414px) 400px,800px"
-                src={thumbnail.l.base64}
-                ref={ref}
-                alt="project_photo"
-                variants={variants_photo}
-                animate={inView ? "visible" : "hidden"}
-                initial="hidden"
-                exit="hidden"
-                whileHover="hover"
-              />
-            )}
-          </InView>
+          <StyledPhoto
+            srcSet={`${thumbnail.s.url} 400w,
+            ${thumbnail.l.url} 800w`}
+            sizes="(max-width: 414px) 400px,800px"
+            src={thumbnail.l.url}
+            alt="project_photo"
+            variants={variants_main}
+            whileHover="hover"
+          />
         </Link>
       </StyledPhotoBox>
 
-      <StyledButton title={name} to={`/project/${_id}`} />
+      <StyledButton title={title} to={`/project/${_id}`} />
     </StyledArticle>
   );
 };

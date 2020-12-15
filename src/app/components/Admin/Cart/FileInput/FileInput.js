@@ -1,68 +1,77 @@
-import React, { useState } from "react";
-import { useCounter } from "../../../../utils/sweet_state";
-import FileBase from "react-file-base64";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 import {
   StyledImg,
   StyledContainer,
-  StyledThumbnail,
   StyledBtn,
   StyledPanel,
   StyledPanelBtn,
 } from "./FileInput.css";
-import { URL } from "../../../../../index";
 
-const inputFileSizes = [
+const fileInputs = [
   { id: uuid(), size: "s" },
   { id: uuid(), size: "m" },
   { id: uuid(), size: "l" },
 ];
 
-const FileInput = ({ name, value, _id }) => {
-  const [, { updateProject }] = useCounter();
+const FileInput = ({ name, _id, value }) => {
   const [show, setShow] = useState(false);
-  const [file, setFile] = useState(value);
+  const [currInput, setCurrInput] = useState(null);
+  const [files, setFiles] = useState(null);
+  const [thumbScr, setThumbSrc] = useState(
+    value && value.s && value.s.url ? value.s.url : null
+  );
 
-  const handleButton = () => {
-    if (show) {
-      const token = localStorage.getItem("auth-token");
-      const options = {
-        method: "POST",
-        body: JSON.stringify({ file, name }),
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": token,
-        },
-      };
-      fetch(`${URL}/projects/update/file/${_id}`, options)
-        .then((resp) => resp.json())
-        .then((resp) => updateProject(resp))
-        .catch((err) => console.log(err));
-    }
-    setShow(!show);
+  //handlers
+  const handleBtn = () => setShow(!show);
+  const handleInput = (e, size) => {
+    const file = e.target.files[0];
+    setFiles({ ...files, [size]: file });
+    setCurrInput(size);
   };
+
+  //upload
+  useEffect(() => {
+    if (files) {
+      const url = `${process.env.REACT_APP_URL}/image/?_id=${_id}&name=${name}&size=${currInput}`;
+      const token = localStorage.getItem("auth-token");
+      const headers = {
+        "content-Type": "multipart/form-data",
+        "x-auth-token": token,
+      };
+      const formData = new FormData();
+      formData.append("image", files[currInput]);
+
+      axios
+        .post(url, formData, { headers })
+        .then((res) => setThumbSrc(res.data.publicUrl));
+    }
+  }, [files]);
 
   return (
     <StyledContainer>
-      {!show && (
-        <StyledThumbnail>
-          <StyledBtn onClick={handleButton}>{`update ${name}`}</StyledBtn>
-          <StyledImg src={file.s.base64} alt="thumbnail" />
-        </StyledThumbnail>
-      )}
-      {show && (
-        <StyledPanel>
-          {inputFileSizes.map(({ id, size }) => (
-            <FileBase
-              key={id}
-              type="file"
-              multiple={false}
-              onDone={(Base64) => setFile({ ...file, [size]: Base64 })}
-            />
-          ))}
-          <StyledPanelBtn onClick={handleButton}>zapisz</StyledPanelBtn>
-        </StyledPanel>
-      )}
+      <StyledPanel>
+        {show ? (
+          <>
+            <StyledPanelBtn onClick={handleBtn} children={`Zapisz ${name}`} />
+            {fileInputs.map(({ size, id }) => (
+              <div key={id}>
+                <input
+                  type="file"
+                  name="image"
+                  onChange={(e) => handleInput(e, size)}
+                />
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            <StyledImg src={thumbScr} alt="thumbnail" />
+            <StyledBtn onClick={handleBtn} children={`Zmien ${name}`} />
+          </>
+        )}
+      </StyledPanel>
     </StyledContainer>
   );
 };

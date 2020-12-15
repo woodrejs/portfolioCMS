@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   StyledBox,
   StyledInput,
@@ -6,28 +7,24 @@ import {
   StyledLabel,
   StyledButton,
 } from "./TextInput.css";
-import { URL } from "../../../../../index";
 
 const TextInput = ({ name, value, _id }) => {
   const [show, setShow] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
+  //handlers
   const handleInput = (e) => setInputValue(e.target.value);
   const handleButton = () => {
     if (show) {
       const token = localStorage.getItem("auth-token");
-      const options = {
-        method: "POST",
-        body: JSON.stringify({ inputValue, name }),
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": token,
-        },
+      const url = `${process.env.REACT_APP_URL}/projects/update/text/${_id}`;
+      const body = { inputValue, name };
+      const headers = {
+        "Content-Type": "application/json",
+        "x-auth-token": token,
       };
 
-      fetch(`${URL}/projects/update/text/${_id}`, options).catch((err) =>
-        console.log(err)
-      );
+      axios.post(url, body, { headers }).catch((err) => console.log(err));
     }
     setShow(!show);
   };
@@ -36,19 +33,23 @@ const TextInput = ({ name, value, _id }) => {
     <div>
       <StyledLabel htmlFor={name}>{name}</StyledLabel>
       <StyledBox>
-        {show && (
-          <StyledInput
-            type="text"
-            name={name}
-            id={name}
-            value={inputValue}
-            onChange={handleInput}
-          />
+        {show ? (
+          <>
+            <StyledInput
+              type="text"
+              name={name}
+              id={name}
+              value={inputValue}
+              onChange={(e) => handleInput(e)}
+            />
+            <StyledButton onClick={handleButton} children="zapisz" />
+          </>
+        ) : (
+          <>
+            <StyledSpan children={inputValue} />
+            <StyledButton onClick={handleButton} children="zmien" />
+          </>
         )}
-        {!show && <StyledSpan>{inputValue}</StyledSpan>}
-        <StyledButton onClick={handleButton}>
-          {!show ? "update" : "zapisz"}
-        </StyledButton>
       </StyledBox>
     </div>
   );

@@ -45,14 +45,11 @@ export const StyledTitle = styled(Title)`
   align-self: start;
   margin-top: 5vh;
 `;
-export const StyledSubTitleBox = styled.div`
-  overflow: hidden;
+export const StyledSubTitle = styled(motion.h4)`
   grid-area: 1/1/2/13;
   justify-self: end;
   align-self: end;
-`;
-export const StyledSubTitle = styled(motion.h4)`
-  width: 100%;
+  transform-origin: top left;
   text-align: right;
 
   color: ${(props) => props.theme.colors.dark};

@@ -19,11 +19,11 @@ export const StyledMenu = styled(motion.div)`
     grid-area: 1/8/2/13;
   }
 `;
-export const StyledMenuItem = styled(motion.div)`
+export const StyledItem = styled(motion.div)`
   cursor: pointer;
   transition: 0.3s;
-  scale: ${(props) => (props.current ? 1.1 : 1)}
-
+  scale: ${(props) => (props.current ? 1.1 : 1)};
+  transform-origin: top left;
   :hover {
     scale: 1.1;
   }
@@ -31,7 +31,7 @@ export const StyledMenuItem = styled(motion.div)`
     scale: 1;
   }
 `;
-export const StyledMenuItemLink = styled(Link)`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 600;
@@ -51,7 +51,7 @@ export const StyledMenuItemLink = styled(Link)`
     font-size: ${(props) => props.theme.size.xs};
   }
 `;
-export const StyledMenuItemUnderLine = styled(motion.div)`
+export const StyledLine = styled(motion.div)`
   transform-origin: left;
   transition: 0.3s;
   border-bottom: 2px solid

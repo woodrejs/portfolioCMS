@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { InView } from "react-intersection-observer";
 import Scrollbar from "smooth-scrollbar";
 import { useMotionValue } from "framer-motion";
 import Footer from "../../components/Footer";
 import { useTransform } from "framer-motion";
 import Nav from "../../components/Nav";
-import { variants_photo, variants_text } from "../../utils/motion/index";
+import { variants_main } from "../../utils/motion/main.motion";
 import { DATA } from "./About.data";
 import LgImg from "../../../assets/images/about/my_photo_2000.jpg";
 import MdImg from "../../../assets/images/about/my_photo_1024.jpg";
@@ -27,28 +27,31 @@ import {
 
 const About = () => {
   const scrollRef = useRef(null);
-  const scrollY = useMotionValue(0);
-  const scale = useTransform(scrollY, [0, 1500], [1, 1.3]);
-  const [imgIsLoaded, setImgIsLoaded] = useState(false);
+  const scroll = useMotionValue(0);
+  const imgIsLoaded = useMotionValue(false);
+  const scale = useTransform(scroll, [0, 1800], [1, 1.3]);
   const [{ isMobile }] = useCounter();
 
   useEffect(() => {
     const scrollBar = Scrollbar.init(scrollRef.current, {
-      damping: isMobile ? 0.02 : 0.07,
+      damping: isMobile ? 0.12 : 0.07,
     });
-    scrollBar.track.xAxis.element.remove();
-    scrollBar.addListener((status) => {
-      scrollY.set(status.offset.y);
-      scrollBar.setPosition(0, status.offset.y);
-    });
-  });
+
+    scrollBar.addListener((status) => scroll.set(status.offset.y));
+  }, []);
 
   return (
     <StyledBck ref={scrollRef}>
       <Nav />
+
       <StyledSection>
         <StyledArticle>
-          <StyledPhotoBox>
+          <StyledPhotoBox
+            variants={variants_main}
+            animate={imgIsLoaded ? "visible" : "hidden"}
+            initial="hidden"
+            exit="hidden"
+          >
             <StyledPhoto
               srcSet={`${SmImg} 736w,
               ${MdImg} 1024w,
@@ -58,20 +61,15 @@ const About = () => {
               2000px"
               src={`${LgImg}`}
               alt="my_photo"
-              variants={variants_photo}
-              animate={imgIsLoaded ? "visible" : "hidden"}
-              initial="hidden"
-              exit="hidden"
+              //motion
               style={{ scale }}
-              onLoad={() => setImgIsLoaded(true)}
+              onLoad={() => imgIsLoaded.set(true)}
             />
           </StyledPhotoBox>
-
           <StyledTitle title="o mnie" size="l" />
 
           <StyledTextBox>
             <StyledSubTitle title="frontend developer" size="m" />
-
             <StyledSubTitleOutline title="ui/ux designer" size="m" />
 
             {DATA.map((item, index) => (
@@ -84,7 +82,7 @@ const About = () => {
                     <StyledText
                       ref={ref}
                       children={item.text}
-                      variants={variants_text}
+                      variants={variants_main}
                       animate={inView ? "visible" : "hidden"}
                       initial="hidden"
                       exit="hidden"
@@ -96,7 +94,10 @@ const About = () => {
           </StyledTextBox>
         </StyledArticle>
       </StyledSection>
-      <Footer />
+      <Footer
+        btn1={{ name: "portfolio", link: "/portfolio" }}
+        btn2={{ name: "kontakt", link: "/contact" }}
+      />
     </StyledBck>
   );
 };

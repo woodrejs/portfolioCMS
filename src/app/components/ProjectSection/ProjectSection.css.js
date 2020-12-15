@@ -28,6 +28,7 @@ export const StyledInfoBox = styled(motion.div)`
 `;
 export const StyledTitle = styled(motion.h3)`
   grid-area: 1/1/2/4;
+  transform-origin: top left;
   display: none;
   font-weight: 600;
   font-size: ${(props) => props.theme.size.xs};
@@ -35,67 +36,6 @@ export const StyledTitle = styled(motion.h3)`
   text-transform: uppercase;
 
   @media screen and (orientation: landscape) {
-    display: block;
-  }
-  @media screen and (min-width: 1280px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.s};
-  }
-`;
-export const StyledDate = styled(motion.span)`
-  grid-area: 1/5/2/6;
-  display: none;
-
-  font-weight: 400;
-  font-size: ${(props) => props.theme.size.xs};
-  line-height: 100%;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 800px) and (orientation: landscape) {
-    display: block;
-  }
-  @media screen and (min-width: 1280px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.s};
-  }
-`;
-export const StyledType = styled(motion.span)`
-  grid-area: 2/5/3/6;
-  display: none;
-  font-weight: 400;
-  font-size: ${(props) => props.theme.size.xs};
-  line-height: 100%;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 800px) and (orientation: landscape) {
-    display: block;
-  }
-  @media screen and (min-width: 1280px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.s};
-  }
-`;
-export const StyledDateData = styled(motion.span)`
-  grid-area: 1/7/2/8;
-  display: none;
-  font-weight: 400;
-  font-size: ${(props) => props.theme.size.xs};
-  line-height: 100%;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 800px) and (orientation: landscape) {
-    display: block;
-  }
-  @media screen and (min-width: 1280px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.s};
-  }
-`;
-export const StyledTypeData = styled(motion.span)`
-  grid-area: 2/7/3/8;
-  display: none;
-  font-weight: 400;
-  font-size: ${(props) => props.theme.size.xs};
-  line-height: 100%;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 800px) and (orientation: landscape) {
     display: block;
   }
   @media screen and (min-width: 1280px) and (orientation: landscape) {
@@ -116,12 +56,11 @@ export const StyledNumber = styled(motion.div)`
     margin: 0;
   }
 `;
-export const StyledPhotoBox = styled.div`
+export const StyledPhotoBox = styled(motion.div)`
   grid-area: 2/1/3/13;
   align-self: start;
-  transform-origin: bottom;
+  transform-origin: top left;
   overflow: hidden;
-
   @media screen and (orientation: landscape) {
     grid-area: 2/9/3/13;
   }
@@ -138,4 +77,33 @@ export const StyledButton = styled(Button)`
 export const StyledLine = styled(Line)`
   grid-area: 1/1/2/13;
   align-self: start;
+`;
+export const StyledData = styled(motion.span)`
+  grid-area: ${({ option }) => {
+    switch (option) {
+      case "dateLable":
+        return "1/5/2/6";
+      case "date":
+        return "1/7/2/8";
+      case "typeLable":
+        return "2/5/3/6";
+      case "type":
+        return "2/7/3/8";
+      default:
+        break;
+    }
+  }};
+  transform-origin: top left;
+  display: none;
+  font-weight: 400;
+  font-size: ${(props) => props.theme.size.xs};
+  line-height: 100%;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 800px) and (orientation: landscape) {
+    display: block;
+  }
+  @media screen and (min-width: 1280px) and (orientation: landscape) {
+    font-size: ${(props) => props.theme.size.s};
+  }
 `;

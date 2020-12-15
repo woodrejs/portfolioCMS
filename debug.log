@@ -18,3 +18,6 @@
 [1201/164439.033:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\macie\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\193faa79-0394-457b-9869-7c5215b830ec: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)
 [1201/164439.034:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\macie\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\9cb4f860-36cc-4f57-8ec5-07aa5b09b58a: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)
 [1201/164439.035:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\macie\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\0b599699-2883-46a1-960a-12ccec865ada: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)
+[1214/174555.034:ERROR:directory_reader_win.cc(43)] FindFirstFile: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)
+[1214/174555.037:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\macie\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\f0b43bdc-d65e-4cc6-b619-766d6a43ab25: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)
+[1215/085449.951:ERROR:directory_reader_win.cc(43)] FindFirstFile: System nie mo¿e odnaleŸæ okreœlonej œcie¿ki. (0x3)

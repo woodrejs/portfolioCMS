@@ -2,13 +2,12 @@ import React, { useEffect, useRef } from "react";
 import Scrollbar from "smooth-scrollbar";
 import ProjectSection from "../../components/ProjectSection";
 import Nav from "../../components/Nav";
-import { variants_title } from "../../utils/motion/index";
+import { variants_main } from "../../utils/motion/main.motion";
 import { useCounter } from "../../utils/sweet_state";
 import {
   StyledBck,
   StyledSection,
   StyledTitle,
-  StyledSubTitleBox,
   StyledSubTitle,
   StyledProjectsBox,
   StyledFooter,
@@ -19,31 +18,24 @@ const Portfolio = () => {
   const [{ projects, isMobile }] = useCounter();
 
   useEffect(() => {
-    const scrollBar = Scrollbar.init(scrollRef.current, {
-      damping: isMobile ? 0.02 : 0.07,
+    Scrollbar.init(scrollRef.current, {
+      damping: isMobile ? 0.12 : 0.07,
     });
-    scrollBar.track.xAxis.element.remove();
-    scrollBar.addListener((status) => {
-      scrollBar.setPosition(0, status.offset.y);
-    });
-  });
+  }, []);
 
   return (
     <StyledBck ref={scrollRef}>
       <Nav />
+
       <StyledSection>
         <StyledTitle title="projekty" size="l" />
 
-        <StyledSubTitleBox
-          children={
-            <StyledSubTitle
-              children="informacje"
-              variants={variants_title}
-              animate="visible"
-              initial="hidden"
-              exit="hidden"
-            />
-          }
+        <StyledSubTitle
+          children="informacje"
+          variants={variants_main}
+          animate="visible"
+          initial="hidden"
+          exit="hidden"
         />
 
         <StyledProjectsBox>
@@ -57,7 +49,10 @@ const Portfolio = () => {
             ))}
         </StyledProjectsBox>
       </StyledSection>
-      <StyledFooter />
+      <StyledFooter
+        btn1={{ name: "o mnie", link: "/about" }}
+        btn2={{ name: "kontakt", link: "/contact" }}
+      />
     </StyledBck>
   );
 };

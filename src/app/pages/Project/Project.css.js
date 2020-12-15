@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import Title from "../../components/Title";
 import Footer from "../../components/Footer";
+import PhotoItem from "../../components/PhotoItem";
 
 export const StyledBck = styled.div`
   width: 100vw;
@@ -36,21 +37,19 @@ export const StyledArticle = styled.article`
 `;
 export const StyledTitle = styled(Title)`
   grid-area: 1/1/2/13;
-  margin-top: 0.5em;
+  margin-top: 0.5rem;
 `;
 export const StyledButton = styled(Button)`
   grid-area: 2/1/3/13;
   margin-bottom: 1em;
 `;
-export const StyledMobileLayoutPhotoBox = styled.div`
+export const StyledMobilePhoto = styled(PhotoItem)`
   grid-area: 3/10/4/13;
   align-self: start;
-  overflow: hidden;
 `;
-export const StyledDeskopLayoutPhotoBox = styled.div`
+export const StyledDeskopPhoto = styled(PhotoItem)`
   grid-area: 3/1/4/9;
   align-self: start;
-  overflow: hidden;
 `;
 export const StyledFooter = styled(Footer)`
   grid-area: 3/1/4/13;

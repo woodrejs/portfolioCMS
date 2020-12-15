@@ -5,6 +5,10 @@ import App from "./app/App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import "lightgallery.js/dist/css/lightgallery.css";
+import dotenv from "dotenv";
+
+//dot env init
+dotenv.config();
 
 const theme = {
   colors: {
@@ -30,7 +34,6 @@ const theme = {
     xxxxxxxxxxl: "282.83px",
   },
 };
-export const URL = "https://portfolio-szczepanski.herokuapp.com";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import TextInput from "./TextInput";
-import FileInput from ".//FileInput";
 import { useCounter } from "../../../utils/sweet_state";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 import {
   StyledForm,
-  StyledTopBox,
-  StyledBotBox,
   StyledButton,
   StyledTitle,
+  StyledBox,
+  StyledInput,
+  StyledLabel,
 } from "./ProjectForm.css";
-import { URL } from "../../../../index";
 
 const textInputsNames = [
   { name: "title", id: uuid() },
@@ -19,69 +18,45 @@ const textInputsNames = [
   { name: "type", id: uuid() },
   { name: "link", id: uuid() },
 ];
-const fileInputsNames = [
-  { name: "thumbnail", id: uuid() },
-  { name: "deskopView", id: uuid() },
-  { name: "mobileView", id: uuid() },
-];
 
 const ProjectForm = () => {
   const [, { addProject }] = useCounter();
-  const [newProject, setNewProject] = useState({
-    title: "",
-    description: "",
-    date: "",
-    type: "",
-    link: "",
-    thumbnail: { s: "", l: "" },
-    deskopView: { s: "", m: "", l: "" },
-    mobileView: { s: "", m: "", l: "" },
-  });
+  const [newProject, setNewProject] = useState(null);
 
-  const handleForm = (e, data) => {
+  //handlers
+  const handleInput = (e, name) =>
+    setNewProject({ ...newProject, [name]: e.target.value });
+  const handleForm = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("auth-token");
 
-    return fetch(`${URL}/projects`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((resp) => addProject(resp))
+    const token = localStorage.getItem("auth-token");
+    const url = `${process.env.REACT_APP_URL}/projects`;
+    const headers = {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    };
+
+    axios
+      .post(url, newProject, { headers })
+      .then((resp) => addProject(resp.data))
       .catch((err) => console.log(err));
   };
 
   return (
-    <StyledForm onSubmit={(e) => handleForm(e, newProject)}>
-      <StyledTitle>Dodaj projekt</StyledTitle>
-      <StyledTopBox>
-        {textInputsNames.map(({ name, id }) => (
-          <TextInput
-            key={id}
-            name={name}
-            change={(obj) => setNewProject({ ...newProject, [name]: obj })}
-          />
-        ))}
-      </StyledTopBox>
+    <StyledForm onSubmit={(e) => handleForm(e)}>
+      <StyledTitle children="Dodaj projekt" />
 
-      <StyledBotBox>
-        {fileInputsNames.map(({ name, id }) => (
-          <FileInput
-            key={id}
+      {textInputsNames.map(({ name, id }) => (
+        <StyledBox key={id}>
+          <StyledLabel htmlFor={name} children={name} />
+          <StyledInput
+            type="text"
             name={name}
-            change={(obj, size) =>
-              setNewProject({
-                ...newProject,
-                [name]: { ...newProject[name], [size]: obj },
-              })
-            }
+            id={name}
+            onChange={(e) => handleInput(e, name)}
           />
-        ))}
-      </StyledBotBox>
+        </StyledBox>
+      ))}
 
       <StyledButton type="submit" value="dodaj" />
     </StyledForm>

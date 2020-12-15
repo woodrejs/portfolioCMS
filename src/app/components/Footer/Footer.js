@@ -7,14 +7,14 @@ import {
   StyledSocial,
 } from "./Footer.css";
 
-const Footer = ({ className }) => {
+const Footer = ({ className, btn1, btn2 }) => {
   return (
     <StyledFooter className={className}>
       <StyledLine />
 
       <StyledButtonBox>
-        <StyledButton title="portfolio" to="/portfolio" isSmall={false} />
-        <StyledButton title="kontakt" to="/contact" isSmall={false} />
+        <StyledButton title={btn1.name} to={btn1.link} isSmall={false} />
+        <StyledButton title={btn2.name} to={btn2.link} isSmall={false} />
       </StyledButtonBox>
 
       <StyledSocial />

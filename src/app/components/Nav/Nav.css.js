@@ -22,21 +22,22 @@ export const StyledNav = styled.nav`
     height: 130px;
   }
 `;
-export const StyledBrand = styled(motion.custom(Link))`
+export const StyledBox = styled(motion.custom(Link))`
   display: flex;
   align-self: center;
   align-items: center;
   grid-area: 1/1/2/6;
   text-decoration: none;
+  transform-origin: top left;
 
   @media screen and (orientation: portrait) {
     grid-area: 1/1/2/8;
   }
 `;
-export const StyledBrandIcon = styled(motion.img)`
+export const StyledIcon = styled(motion.img)`
   height: 18px;
 `;
-export const StyledBrandName = styled(motion.span)`
+export const StyledName = styled(motion.span)`
   margin-left: 1em;
   text-transform: uppercase;
 

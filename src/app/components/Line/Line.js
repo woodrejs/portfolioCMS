@@ -5,7 +5,7 @@ import { variants_line } from "../../utils/motion/index";
 import { useCounter } from "../../utils/sweet_state";
 
 const Line = ({ className }) => {
-  const [state] = useCounter();
+  const [{ isdark }] = useCounter();
 
   return (
     <InView triggerOnce={true}>
@@ -13,7 +13,7 @@ const Line = ({ className }) => {
         <StyledLine
           ref={ref}
           className={className}
-          isdark={state.isdark}
+          isdark={isdark}
           variants={variants_line}
           animate={inView ? "visible" : "hidden"}
           initial="hidden"

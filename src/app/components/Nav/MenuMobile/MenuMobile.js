@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { DATA } from "../Nav.data";
 import { useCounter } from "../../../utils/sweet_state";
 import {
-  variants_list,
-  variants_item,
+  variants_main,
   variants_menuMobile,
 } from "../../../utils/motion/index";
 import {
@@ -30,7 +29,7 @@ const MenuMobile = () => {
     <>
       <StyledHamburger
         onClick={handleHamburger}
-        variants={variants_list}
+        variants={variants_main}
         initial="hidden"
         animate="visible"
         exit="hidden"
@@ -38,12 +37,12 @@ const MenuMobile = () => {
         <StyledHamburgerName
           children="Menu"
           isdark={isdark}
-          variants={variants_item}
+          variants={variants_main}
           whileHover="hover"
         />
         <StyledHamburgerIcon
           src={isdark ? CrossLightIcon : CrossDarkIcon}
-          variants={variants_item}
+          variants={variants_main}
           alt="hamburger_icon"
           whileHover="hover"
         />
@@ -63,7 +62,7 @@ const MenuMobile = () => {
         />
 
         <StyledMobileMenuBox
-          variants={variants_list}
+          variants={variants_main}
           animate="visible"
           initial="hidden"
           exit="hidden"
@@ -72,7 +71,7 @@ const MenuMobile = () => {
             <StyledMobileMenuItem
               key={`${item.id}${Math.random()}`}
               custom={index}
-              variants={variants_item}
+              variants={variants_main}
               whileHover="hover"
             >
               <StyledMobileMenuLink

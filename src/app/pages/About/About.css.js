@@ -47,32 +47,26 @@ export const StyledArticle = styled.article`
 `;
 export const StyledTitle = styled(Title)`
   grid-area: 1/1/2/13;
-  margin: 3em 0;
+  margin: 3rem 0;
   z-index: 1;
   @media screen and (orientation: landscape) {
     grid-area: 1/1/2/7;
     justify-self: end;
-    margin-top: 1em;
+    margin-top: 1rem;
   }
   @media screen and (min-width: 800px) and (orientation: landscape) {
     grid-area: 1/1/2/8;
   }
   @media screen and (min-width: 1920px) and (orientation: landscape) {
-    margin-top: 5em;
+    margin-top: 5rem;
     grid-area: 1/1/2/9;
   }
 `;
-export const StyledPhoto = styled(motion.img)`
-  width: 100%;
-
-  transform-origin: bottom;
-`;
-export const StyledPhotoBox = styled.div`
+export const StyledPhotoBox = styled(motion.div)`
   grid-area: 2/1/3/13;
-  width: 100%;
-
   overflow: hidden;
-
+  width: 100%;
+  transform-origin: top left;
   @media screen and (orientation: landscape) {
     grid-area: 1/6/2/13;
   }
@@ -82,6 +76,9 @@ export const StyledPhotoBox = styled.div`
   @media screen and (min-width: 1920px) and (orientation: landscape) {
     grid-area: 1/8/2/13;
   }
+`;
+export const StyledPhoto = styled(motion.img)`
+  width: 100%;
 `;
 export const StyledTextBox = styled.div`
   grid-area: 3/1/4/13;
@@ -100,21 +97,21 @@ export const StyledTextBox = styled.div`
   }
 `;
 export const StyledSubTitle = styled(Title)`
-  margin: 0 0 1em 0;
+  margin: 0 0 1rem 0;
 
   @media screen and (orientation: landscape) {
     max-width: 42vw;
   }
 `;
 export const StyledSubTitleOutline = styled(Title)`
-  margin-bottom: 4em;
+  margin-bottom: 4.5rem;
   z-index: 1;
   -webkit-text-fill-color: ${(props) => props.theme.colors.dark};
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: ${(props) => props.theme.colors.light};
 `;
 export const StyledThirdTitle = styled(Title)`
-  margin-bottom: 3em;
+  margin-bottom: 3rem;
 `;
 export const StyledText = styled(motion.p)`
   margin-bottom: 5em;

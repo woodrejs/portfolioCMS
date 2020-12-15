@@ -7,15 +7,6 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const StyledThumbnail = styled.div`
-  height: 100%;
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-`;
 export const StyledBtn = styled.button`
   border: none;
   background: ${(props) => props.theme.colors.dark};
@@ -36,7 +27,7 @@ export const StyledPanel = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
   position: relative;
@@ -50,7 +41,7 @@ export const StyledPanelBtn = styled.button`
   padding: 10px;
   cursor: pointer;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   right: 0;
 `;
 export const StyledSpan = styled.span`

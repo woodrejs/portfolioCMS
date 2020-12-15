@@ -1,39 +1,39 @@
 import React from "react";
 import MenuDeskop from "./MenuDeskop";
 import MenuMobile from "./MenuMobile";
-import { useLocation } from "react-router-dom";
 import { useCounter } from "../../utils/sweet_state";
-import { variants_list } from "../../utils/motion/list.motion";
+import { variants_main } from "../../utils/motion/main.motion";
 import CopywriterLightIcon from "../../../assets/icons/light_copywriter_icon.svg";
 import CopywriterDarkIcon from "../../../assets/icons/dark_copywriter_icon.svg";
 import {
   StyledNav,
-  StyledBrand,
-  StyledBrandIcon,
-  StyledBrandName,
+  StyledBox,
+  StyledIcon,
+  StyledName,
   StyledLine,
 } from "./Nav.css";
 
 const Nav = () => {
   const [{ isdark }] = useCounter();
-  const pathname = useLocation().pathname;
 
   return (
     <StyledNav isdark={isdark}>
-      <StyledBrand
+      <StyledBox
         to="/"
-        variants={variants_list}
+        variants={variants_main}
         initial="hidden"
         animate="visible"
         exit="hidden"
       >
-        <StyledBrandIcon
+        <StyledIcon
           src={isdark ? CopywriterLightIcon : CopywriterDarkIcon}
           alt="copywriter_icon"
         />
-        <StyledBrandName children="Maciej Szczepański" isdark={isdark} />
-      </StyledBrand>
-      <MenuDeskop pathname={pathname} />
+        <StyledName children="Maciej Szczepański" isdark={isdark} />
+      </StyledBox>
+
+      <MenuDeskop />
+
       <MenuMobile />
       <StyledLine />
     </StyledNav>

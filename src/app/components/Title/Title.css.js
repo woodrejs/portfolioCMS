@@ -1,73 +1,62 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const StyledTitle = styled.div``;
-export const StyledBox = styled.div`
-  overflow: hidden;
-`;
-export const StyledH1 = styled(motion.h1)`
+export const StyledTitle = styled(motion.h2)`
   font-weight: 600;
-  font-size: ${(props) => props.theme.size.xxxl};
+  text-transform: uppercase;
+  transform-origin: top left !important;
   color: ${(props) =>
     props.isdark ? props.theme.colors.light : props.theme.colors.dark};
-  line-height: 82.68%;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
+  font-size: ${({ size, theme }) => {
+    switch (size) {
+      case "s":
+        return theme.size.l;
+      case "m":
+        return theme.size.xl;
+      case "l":
+        return theme.size.xxxl;
+      default:
+        return theme.size.l;
+    }
+  }};
+  line-height: ${({ size }) => (size === "l" ? "82.68%" : "98.18%")};
+  letter-spacing: ${({ size }) => (size === "l" ? "-0.05em" : "0")};
+  margin-bottom: ${({ size }) => (size === "m" ? "5px" : "0")};
 
   @media screen and (min-width: 414px) and (orientation: portrait) {
-    font-size: ${(props) => props.theme.size.xxxxl};
+    font-size: ${({ size, theme }) => size === "l" && theme.size.xxxxl};
   }
   @media screen and (min-width: 600px) and (orientation: portrait) {
-    font-size: ${(props) => props.theme.size.xxxxxxl};
+    font-size: ${({ size, theme }) => {
+      if (size === "l") return theme.size.xxxxxxl;
+      if (size === "m") return theme.size.xxxl;
+    }};
   }
   @media screen and (min-width: 768px) and (orientation: portrait) {
-    font-size: ${(props) => props.theme.size.xxxxxxxl};
+    font-size: ${({ size, theme }) => size === "l" && theme.size.xxxxxxxl};
   }
-
   @media screen and (min-width: 667px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxxxl};
+    font-size: ${({ size, theme }) => size === "l" && theme.size.xxxxxl};
   }
   @media screen and (min-width: 800px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxxxxxl};
+    font-size: ${({ size, theme }) => {
+      if (size === "l") return theme.size.xxxxxxxl;
+      if (size === "m") return theme.size.xxl;
+    }};
   }
   @media screen and (min-width: 1024px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxxxxxxl};
+    font-size: ${({ size, theme }) => {
+      if (size === "l") return theme.size.xxxxxxxxl;
+      if (size === "m") return theme.size.xxxl;
+    }};
   }
   @media screen and (min-width: 1280px) and (orientation: landscape) {
-    font-size: 180px;
-  }
-  @media screen and (min-width: 1920px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxxxxxxxl};
-  }
-`;
-export const StyledH2 = styled(motion.h2)`
-  font-weight: 600;
-  font-size: ${(props) => props.theme.size.xl};
-  color: ${(props) =>
-    props.isdark ? props.theme.colors.light : props.theme.colors.daark};
-  line-height: 98.18%;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-
-  @media screen and (min-width: 600px) and (orientation: portrait) {
-    font-size: ${(props) => props.theme.size.xxxl};
-  }
-  @media screen and (min-width: 800px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxl};
-  }
-  @media screen and (min-width: 1024px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxl};
+    font-size: ${({ size, theme }) => size === "l" && "180px"};
   }
   @media screen and (min-width: 1440px) and (orientation: landscape) {
-    font-size: ${(props) => props.theme.size.xxxxxl};
+    font-size: ${({ size, theme }) => size === "m" && theme.size.xxxxxl};
   }
-`;
-export const StyledH3 = styled(motion.h3)`
-  font-weight: 600;
-  font-size: ${(props) => props.theme.size.l};
-  color: ${(props) =>
-    props.isdark ? props.theme.colors.light : props.theme.colors.dark};
-  line-height: 98.18%;
-
-  text-transform: uppercase;
+  @media screen and (min-width: 1920px) and (orientation: landscape) {
+    font-size: ${({ size, theme }) => size === "l" && theme.size.xxxxxxxxxl};
+  }
 `;

@@ -1,5 +1,5 @@
 import { createStore, createSubscriber, createHook } from "react-sweet-state";
-import { URL } from "../../../index";
+import axios from "axios";
 
 const pathname = window.location.pathname;
 
@@ -25,11 +25,6 @@ const Store = createStore({
     logged: false,
   },
   actions: {
-    setLoaded: () => ({ setState }) => {
-      setState({
-        loaded: true,
-      });
-    },
     setLogged: (bool, token) => ({ setState }) => {
       localStorage.setItem("auth-token", token);
       setState({
@@ -48,13 +43,15 @@ const Store = createStore({
         loading: true,
       });
 
-      let projects = await fetch(`${URL}/projects`);
-      projects = await projects.json();
-
-      setState({
-        loading: false,
-        projects,
-      });
+      axios(`${process.env.REACT_APP_URL}/projects`)
+        .then(({ data }) =>
+          setState({
+            loading: false,
+            projects: data,
+            loaded: true,
+          })
+        )
+        .catch((err) => console.log(err));
     },
     addProject: (obj) => ({ setState, getState }) => {
       setState({

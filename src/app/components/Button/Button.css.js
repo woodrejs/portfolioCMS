@@ -8,10 +8,8 @@ export const StyledButton = styled(motion.custom(Link))`
   align-items: flex-end;
   text-decoration: none;
 `;
-export const StyledTextBox = styled.div`
-  overflow: hidden;
-`;
 export const StyledText = styled(motion.div)`
+  transform-origin: top left;
   font-weight: 600;
   text-transform: uppercase;
   color: ${(props) =>

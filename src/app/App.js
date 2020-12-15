@@ -9,12 +9,13 @@ import Project from "./pages/Project";
 import Admin from "./pages/Admin";
 import { useCounter } from "./utils/sweet_state";
 import Load from "./pages/Load";
-import { URL } from "../index";
+import axios from "axios";
 
 const App = () => {
   const location = useLocation();
   const [{ loaded }, { setIsDark, setProjects, setLogged }] = useCounter();
 
+  //handlers
   const handleExit = () => {
     const pathname = location.pathname;
     const isBckDark =
@@ -28,27 +29,27 @@ const App = () => {
     setIsDark(isBckDark);
     window.scrollTo(0, 0);
   };
+
   // store init
   useEffect(() => setProjects(), []);
+
   //set token
   useEffect(() => {
     let token = localStorage.getItem("auth-token");
+    const url = `${process.env.REACT_APP_URL}/user/tokenIsValid`;
+    const headers = {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    };
 
     if (!token) {
       token = "";
       return setLogged(false, token);
     }
 
-    fetch(`${URL}/user/tokenIsValid`, {
-      method: "POST",
-      body: null,
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
-      },
-    })
-      .then((resp) => resp.json())
-      .then((resp) => resp && setLogged(resp, token))
+    axios
+      .post(url, null, headers)
+      .then((resp) => resp && setLogged(true, token))
       .catch((err) => console.log(err));
   }, []);
 
