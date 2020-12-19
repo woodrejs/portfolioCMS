@@ -36,8 +36,11 @@ const About = () => {
     const scrollBar = Scrollbar.init(scrollRef.current, {
       damping: isMobile ? 0.12 : 0.07,
     });
-
-    scrollBar.addListener((status) => scroll.set(status.offset.y));
+    scrollBar.track.xAxis.element.remove();
+    scrollBar.addListener((status) => {
+      scrollBar.setPosition(0, status.offset.y);
+      scroll.set(status.offset.y);
+    });
   }, []);
 
   return (

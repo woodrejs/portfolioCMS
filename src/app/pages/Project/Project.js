@@ -23,8 +23,12 @@ const Project = () => {
     projects && projects.filter((project) => project._id === id)[0];
 
   useEffect(() => {
-    Scrollbar.init(scrollRef.current, {
+    const scrollBar = Scrollbar.init(scrollRef.current, {
       damping: isMobile ? 0.02 : 0.07,
+    });
+    scrollBar.track.xAxis.element.remove();
+    scrollBar.addListener((status) => {
+      scrollBar.setPosition(0, status.offset.y);
     });
   }, []);
 

@@ -24,11 +24,15 @@ const infoFields = [
 
 const ProjectSection = ({ data, number }) => {
   const [show, setShow] = useState(false);
-  const { title, thumbnail, _id } = data;
+  const { title, _id } = data;
   const { ref, inView } = useInView({
     threshold: 0,
     triggerOnce: true,
   });
+  const ThumbnailSUrl =
+    data && data.thumbnail && data.thumbnail.s ? data.thumbnail.s.url : null;
+  const ThumbnailLUrl =
+    data && data.thumbnail && data.thumbnail.l ? data.thumbnail.l.url : null;
 
   useEffect(() => setShow(inView), [inView]);
 
@@ -73,10 +77,10 @@ const ProjectSection = ({ data, number }) => {
       >
         <Link to={`/project/${_id}`}>
           <StyledPhoto
-            srcSet={`${thumbnail.s.url} 400w,
-            ${thumbnail.l.url} 800w`}
+            srcSet={`${ThumbnailSUrl} 400w,
+            ${ThumbnailLUrl} 800w`}
             sizes="(max-width: 414px) 400px,800px"
-            src={thumbnail.l.url}
+            src={ThumbnailLUrl}
             alt="project_photo"
             variants={variants_main}
             whileHover="hover"
