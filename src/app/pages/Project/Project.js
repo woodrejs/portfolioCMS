@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import { scrollTrack } from "../../utils/scroll";
 import { useParams } from "react-router-dom";
 import { LightgalleryProvider } from "react-lightgallery";
-import Scrollbar from "smooth-scrollbar";
 import Nav from "../../components/Nav";
 import { useCounter } from "../../utils/sweet_state";
 import {
@@ -19,18 +19,9 @@ const Project = () => {
   const [{ projects, isMobile }] = useCounter();
   const scrollRef = useRef(null);
   const { id } = useParams();
-  const project =
-    projects && projects.filter((project) => project._id === id)[0];
+  const project = projects?.filter((project) => project._id === id)[0];
 
-  useEffect(() => {
-    const scrollBar = Scrollbar.init(scrollRef.current, {
-      damping: isMobile ? 0.02 : 0.07,
-    });
-    scrollBar.track.xAxis.element.remove();
-    scrollBar.addListener((status) => {
-      scrollBar.setPosition(0, status.offset.y);
-    });
-  }, []);
+  useEffect(() => scrollTrack(null, isMobile, scrollRef), []);
 
   return (
     <StyledBck ref={scrollRef}>
@@ -38,12 +29,12 @@ const Project = () => {
       {project && (
         <StyledSection>
           <StyledArticle>
-            <StyledTitle title={project.title} size="l" />
+            <StyledTitle title={project?.title} size="l" />
             <StyledButton title="powrót" to="/portfolio" invertArrow={true} />
 
             <LightgalleryProvider galleryClassName="my_custom_classname">
-              <StyledMobilePhoto image={project.mobileView} />
-              <StyledDeskopPhoto image={project.deskopView} />
+              <StyledMobilePhoto image={project?.mobileView} type="mobile" />
+              <StyledDeskopPhoto image={project?.deskopView} type="deskop" />
             </LightgalleryProvider>
           </StyledArticle>
         </StyledSection>

@@ -4,21 +4,20 @@ import { variants_main } from "../../utils/motion/main.motion";
 import { useMotionValue } from "framer-motion";
 import { StyledPhoto } from "./PhotoItem.css";
 
-const PhotoItem = ({ image, className }) => {
+const PhotoItem = ({ image, className, type }) => {
   const imgIsLoaded = useMotionValue(false);
+  const { s, m, l } = image;
+  const mobileSrcSet = `${s.url} 200w,${m.url} 250w,${l.url} 400w`;
+  const deskopSrcSet = `${s.url} 260w,${m.url} 640w,${l.url} 920w`;
 
   return (
     <div className={className}>
       {image && (
-        <LightgalleryItem group="any" src={image.l.url}>
+        <LightgalleryItem group="any" src={l.url}>
           <StyledPhoto
-            srcSet={`${image.s.url} 260w,
-            ${image.m.url} 640w,
-            ${image.l.url} 920w`}
-            sizes="(max-width: 414px) 260px,
-            (max-width: 1024px) 640px,
-            920px"
-            src={image.l.url}
+            srcSet={type === "mobile" ? mobileSrcSet : deskopSrcSet}
+            sizes={type === "mobile" ? "25vw" : "66vw"}
+            src={l.url}
             alt="project_layout_image"
             //motion
             variants={variants_main}

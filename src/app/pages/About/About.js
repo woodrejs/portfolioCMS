@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { InView } from "react-intersection-observer";
-import Scrollbar from "smooth-scrollbar";
 import { useMotionValue } from "framer-motion";
 import Footer from "../../components/Footer";
 import { useTransform } from "framer-motion";
+import { scrollTrack } from "../../utils/scroll";
 import Nav from "../../components/Nav";
 import { variants_main } from "../../utils/motion/main.motion";
 import { DATA } from "./About.data";
@@ -32,16 +32,7 @@ const About = () => {
   const scale = useTransform(scroll, [0, 1800], [1, 1.3]);
   const [{ isMobile }] = useCounter();
 
-  useEffect(() => {
-    const scrollBar = Scrollbar.init(scrollRef.current, {
-      damping: isMobile ? 0.12 : 0.07,
-    });
-    scrollBar.track.xAxis.element.remove();
-    scrollBar.addListener((status) => {
-      scrollBar.setPosition(0, status.offset.y);
-      scroll.set(status.offset.y);
-    });
-  }, []);
+  useEffect(() => scrollTrack(scroll, isMobile, scrollRef), []);
 
   return (
     <StyledBck ref={scrollRef}>
@@ -59,12 +50,9 @@ const About = () => {
               srcSet={`${SmImg} 736w,
               ${MdImg} 1024w,
               ${LgImg} 2000w`}
-              sizes="(max-width: 736px) 736px,
-              (max-width: 1024px) 1024px,
-              2000px"
+              sizes="(max-width: 768px) 100vw, 60vw"
               src={`${LgImg}`}
               alt="my_photo"
-              //motion
               style={{ scale }}
               onLoad={() => imgIsLoaded.set(true)}
             />
@@ -75,22 +63,17 @@ const About = () => {
             <StyledSubTitle title="frontend developer" size="m" />
             <StyledSubTitleOutline title="ui/ux designer" size="m" />
 
-            {DATA.map((item, index) => (
+            {DATA.map((item) => (
               <InView triggerOnce={true} threshold={0.2} key={item.id}>
                 {({ inView, ref }) => (
-                  <>
-                    {index === 2 && (
-                      <StyledThirdTitle title="oferta" size="s" />
-                    )}
-                    <StyledText
-                      ref={ref}
-                      children={item.text}
-                      variants={variants_main}
-                      animate={inView ? "visible" : "hidden"}
-                      initial="hidden"
-                      exit="hidden"
-                    />
-                  </>
+                  <StyledText
+                    ref={ref}
+                    children={item.text}
+                    variants={variants_main}
+                    animate={inView ? "visible" : "hidden"}
+                    initial="hidden"
+                    exit="hidden"
+                  />
                 )}
               </InView>
             ))}

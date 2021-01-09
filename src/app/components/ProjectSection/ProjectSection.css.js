@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 import { motion } from "framer-motion";
 import Line from "../Line";
+import { Link } from "react-router-dom";
 
 export const StyledArticle = styled(motion.article)`
   min-height: 50vh;
@@ -61,12 +62,21 @@ export const StyledPhotoBox = styled(motion.div)`
   align-self: start;
   transform-origin: top left;
   overflow: hidden;
+  height: 80vh;
+  display: flex;
+  align-items: flex-end;
+
   @media screen and (orientation: landscape) {
+    height: 75vh;
     grid-area: 2/9/3/13;
   }
 `;
+export const StyledLink = styled(Link)`
+  overflow: hidden;
+`;
 export const StyledPhoto = styled(motion.img)`
   width: 100%;
+  min-height: 100%;
 `;
 export const StyledButton = styled(Button)`
   margin: 1em 0;

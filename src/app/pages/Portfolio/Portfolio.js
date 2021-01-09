@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Scrollbar from "smooth-scrollbar";
+import { scrollTrack } from "../../utils/scroll";
 import ProjectSection from "../../components/ProjectSection";
 import Nav from "../../components/Nav";
 import { variants_main } from "../../utils/motion/main.motion";
@@ -17,15 +17,7 @@ const Portfolio = () => {
   const scrollRef = useRef(null);
   const [{ projects, isMobile }] = useCounter();
 
-  useEffect(() => {
-    const scrollBar = Scrollbar.init(scrollRef.current, {
-      damping: isMobile ? 0.12 : 0.07,
-    });
-    scrollBar.track.xAxis.element.remove();
-    scrollBar.addListener((status) => {
-      scrollBar.setPosition(0, status.offset.y);
-    });
-  }, []);
+  useEffect(() => scrollTrack(null, isMobile, scrollRef), []);
 
   return (
     <StyledBck ref={scrollRef}>
@@ -43,14 +35,13 @@ const Portfolio = () => {
         />
 
         <StyledProjectsBox>
-          {projects &&
-            projects.map((project, index) => (
-              <ProjectSection
-                key={project._id}
-                data={project}
-                number={index + 1}
-              />
-            ))}
+          {projects?.map((project, index) => (
+            <ProjectSection
+              key={project._id}
+              data={project}
+              number={index + 1}
+            />
+          ))}
         </StyledProjectsBox>
       </StyledSection>
       <StyledFooter

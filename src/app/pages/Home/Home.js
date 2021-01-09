@@ -30,9 +30,7 @@ const Home = () => {
             srcSet={`${SmImg} 736w,
             ${MdImg} 1024w,
             ${LgImg} 1520w`}
-            sizes="(max-width: 736px) 736px,
-            (max-width: 1024px) 1024px,
-            1520px"
+            sizes="90vw"
             src={`${LgImg}`}
             alt="my_photo"
             variants={variants_main}

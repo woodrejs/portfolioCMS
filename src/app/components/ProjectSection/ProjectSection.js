@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Link } from "react-router-dom";
+
 import { v4 as uuid } from "uuid";
 import { variants_main } from "../../utils/motion/main.motion";
 import {
@@ -13,6 +13,7 @@ import {
   StyledPhoto,
   StyledButton,
   StyledLine,
+  StyledLink,
 } from "./ProjectSection.css";
 
 const infoFields = [
@@ -23,16 +24,12 @@ const infoFields = [
 ];
 
 const ProjectSection = ({ data, number }) => {
-  const [show, setShow] = useState(false);
   const { title, _id } = data;
-  const { ref, inView } = useInView({
-    threshold: 0,
-    triggerOnce: true,
-  });
-  const ThumbnailSUrl =
-    data && data.thumbnail && data.thumbnail.s ? data.thumbnail.s.url : null;
-  const ThumbnailLUrl =
-    data && data.thumbnail && data.thumbnail.l ? data.thumbnail.l.url : null;
+  const thumbL = data?.thumbnail?.l?.url;
+  const thumbS = data?.thumbnail?.s?.url;
+  const [show, setShow] = useState(false);
+  const options = { threshold: 0, triggerOnce: true };
+  const { ref, inView } = useInView(options);
 
   useEffect(() => setShow(inView), [inView]);
 
@@ -75,17 +72,17 @@ const ProjectSection = ({ data, number }) => {
         initial="hidden"
         exit="hidden"
       >
-        <Link to={`/project/${_id}`}>
+        <StyledLink to={`/project/${_id}`}>
           <StyledPhoto
-            srcSet={`${ThumbnailSUrl} 400w,
-            ${ThumbnailLUrl} 800w`}
-            sizes="(max-width: 414px) 400px,800px"
-            src={ThumbnailLUrl}
+            srcSet={`${thumbS} 400w,
+            ${thumbL} 800w`}
+            sizes="100vw, (orientation: landscape) 30vw"
+            src={thumbL}
             alt="project_photo"
             variants={variants_main}
             whileHover="hover"
           />
-        </Link>
+        </StyledLink>
       </StyledPhotoBox>
 
       <StyledButton title={title} to={`/project/${_id}`} />

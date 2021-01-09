@@ -20,6 +20,7 @@ export const StyledBck = styled.div`
 `;
 export const StyledSection = styled.section`
   max-width: 1366px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 40vh auto auto;

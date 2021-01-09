@@ -19,11 +19,13 @@ export const StyledBck = styled.div`
   }
 `;
 export const StyledSection = styled.section`
+  width: 100%;
   max-width: 1366px;
   background: ${(props) => props.theme.colors.dark};
 `;
 export const StyledArticle = styled.article`
   display: grid;
+
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 50vh 1fr auto;
   margin-bottom: 3em;
